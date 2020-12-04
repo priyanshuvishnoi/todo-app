@@ -6,7 +6,11 @@ const Form = ({ setInputText, todos, setTodos, inputText, setStatus }) => {
     event.preventDefault();
     setTodos([
       ...todos,
-      { text: inputText, completed: false, id: Math.random() * 1000 },
+      {
+        text: inputText,
+        completed: false,
+        id: Math.floor(Math.random() * 1000) + 1,
+      },
     ]);
     setInputText('');
   };
