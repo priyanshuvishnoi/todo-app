@@ -1,14 +1,18 @@
 import React from 'react';
 import Todo from './Todo';
-import { TodoType } from '../App';
+import type { TodoType } from '../App';
 
-export interface TodoListPropsType {
+export type TodoListPropsType = {
   todos: TodoType[];
-  setTodos: Function;
+  setTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
   filteredTodos: TodoType[];
-}
+};
 
-const TodoList = ({ todos, setTodos, filteredTodos }: TodoListPropsType) => {
+const TodoList: React.FC<TodoListPropsType> = ({
+  todos,
+  setTodos,
+  filteredTodos,
+}) => {
   return (
     <div className="todo-container">
       <ul className="todo-list">

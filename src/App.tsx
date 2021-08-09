@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import Form from './components/Form';
 import TodoList from './components/TodoList';
 
-export interface TodoType {
+export type TodoType = {
   id: string;
   text: string;
   completed: boolean;
-}
+};
 
-const App = (): JSX.Element => {
+function App() {
   const [inputText, setInputText] = useState('');
   const [todos, setTodos] = useState<TodoType[]>([]);
   const [status, setStatus] = useState('all');
@@ -65,6 +65,6 @@ const App = (): JSX.Element => {
       />
     </div>
   );
-};
+}
 
 export default App;

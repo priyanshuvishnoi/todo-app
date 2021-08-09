@@ -1,34 +1,35 @@
 import React from 'react';
-import { TodoType } from '../App';
+import { nanoid } from 'nanoid';
+import type { TodoType } from '../App';
 
 export type FormPropsType = {
-  setInputText: Function;
+  setInputText: React.Dispatch<React.SetStateAction<string>>;
   todos: TodoType[];
-  setTodos: Function;
+  setTodos: React.Dispatch<React.SetStateAction<TodoType[]>>;
   inputText: string;
-  setStatus: Function;
+  setStatus: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const Form = ({
+const Form: React.FC<FormPropsType> = ({
   inputText,
   setInputText,
   setStatus,
   setTodos,
   todos,
-}: FormPropsType) => {
+}) => {
   const InputTextHandler = (event: React.ChangeEvent<HTMLInputElement>) =>
     setInputText(event.target.value);
 
   const submitTodoHandler = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    event.preventDefault()
+    event.preventDefault();
     setTodos([
       ...todos,
       {
         text: inputText,
         completed: false,
-        id: Math.floor(Math.random() * 1000) + 1,
+        id: nanoid(),
       },
     ]);
     setInputText('');
