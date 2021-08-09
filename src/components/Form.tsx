@@ -1,9 +1,28 @@
 import React from 'react';
+import { TodoType } from '../App';
 
-const Form = ({ setInputText, todos, setTodos, inputText, setStatus }) => {
-  const InputTextHandler = event => setInputText(event.target.value);
-  const submitTodoHandler = event => {
-    event.preventDefault();
+export type FormPropsType = {
+  setInputText: Function;
+  todos: TodoType[];
+  setTodos: Function;
+  inputText: string;
+  setStatus: Function;
+};
+
+const Form = ({
+  inputText,
+  setInputText,
+  setStatus,
+  setTodos,
+  todos,
+}: FormPropsType) => {
+  const InputTextHandler = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setInputText(event.target.value);
+
+  const submitTodoHandler = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.preventDefault()
     setTodos([
       ...todos,
       {
@@ -14,7 +33,10 @@ const Form = ({ setInputText, todos, setTodos, inputText, setStatus }) => {
     ]);
     setInputText('');
   };
-  const statusHandler = event => setStatus(event.target.value);
+
+  const statusHandler = (event: React.ChangeEvent<HTMLSelectElement>) =>
+    setStatus(event.target.value);
+
   return (
     <form>
       <input

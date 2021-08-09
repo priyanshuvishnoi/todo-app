@@ -1,6 +1,14 @@
 import React from 'react';
+import { TodoType } from '../App';
 
-const Todo = ({ text, todo, todos, setTodos }) => {
+export type TodoPropsType = {
+  text: string;
+  todo: TodoType;
+  todos: TodoType[];
+  setTodos: Function;
+};
+
+const Todo = ({ text, todo, todos, setTodos }: TodoPropsType) => {
   const deleteHandler = () =>
     setTodos(todos.filter(element => element.id !== todo.id));
 
@@ -17,6 +25,7 @@ const Todo = ({ text, todo, todos, setTodos }) => {
       })
     );
   };
+
   return (
     <div className="todo">
       <li className={`todo-item ${todo.completed ? 'completed' : ''}`}>

@@ -3,11 +3,17 @@ import './App.css';
 import Form from './components/Form';
 import TodoList from './components/TodoList';
 
-function App() {
+export interface TodoType {
+  id: string;
+  text: string;
+  completed: boolean;
+}
+
+const App = (): JSX.Element => {
   const [inputText, setInputText] = useState('');
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState<TodoType[]>([]);
   const [status, setStatus] = useState('all');
-  const [filteredTodos, setfilteredTodos] = useState([]);
+  const [filteredTodos, setfilteredTodos] = useState<TodoType[]>([]);
 
   useEffect(() => getLocalTodos(), []);
 
@@ -35,7 +41,7 @@ function App() {
     if (localStorage.getItem('todos') === null) {
       localStorage.setItem('todos', JSON.stringify([]));
     } else {
-      let todoLocal = JSON.parse(localStorage.getItem('todos'));
+      let todoLocal = JSON.parse(localStorage.getItem('todos')!);
       setTodos(todoLocal);
     }
   };
@@ -53,14 +59,12 @@ function App() {
         setStatus={setStatus}
       />
       <TodoList
-        setInputText={setInputText}
         todos={todos}
         setTodos={setTodos}
-        inputText={inputText}
         filteredTodos={filteredTodos}
       />
     </div>
   );
-}
+};
 
 export default App;
